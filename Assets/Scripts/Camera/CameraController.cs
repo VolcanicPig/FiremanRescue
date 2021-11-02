@@ -5,6 +5,7 @@ using UnityEngine;
 using Cinemachine; 
 using VolcanicPig;
 using VolcanicPig.Mobile;
+using VolcanicPig.Utilities;
 
 namespace Game
 {
@@ -12,6 +13,8 @@ namespace Game
     {
         public Dictionary<string, CinemachineVirtualCameraBase> cameraMap;
         private CinemachineVirtualCameraBase _currCamera;
+
+        [SerializeField] private FollowTargetsPosition followTarget;
 
         private void OnEnable()
         {
@@ -26,6 +29,11 @@ namespace Game
         private void Start()
         {
             SwapCamera("Start");
+        }
+
+        public void SetFollowTarget(Transform target)
+        {
+            followTarget.SetTarget(target);
         }
 
         private void OnGameStateChanged(GameState newState)

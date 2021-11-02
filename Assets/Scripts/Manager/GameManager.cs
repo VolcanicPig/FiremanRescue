@@ -7,6 +7,13 @@ namespace Game
 {
     public class GameManager : MobileGameManagerTemplate<GameManager>
     {
+        protected override void SpawnPlayer()
+        {
+            base.SpawnPlayer();
+            CameraController.Instance.SetFollowTarget(GetCurrentPlayer.transform);
+        }
+
+
         private void Update() 
         {
 #if UNITY_EDITOR
