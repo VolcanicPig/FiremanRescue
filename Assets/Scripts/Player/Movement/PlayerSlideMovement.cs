@@ -10,25 +10,25 @@ namespace Game
     {
         public override void HandleMovement()
         {
-            if (_automatedMovementActive) return;
+            if (AutomatedMovementActive) return;
 
             Vector3 cachedPosition = transform.position;
             Vector2 touchDelta = _gestures.TouchDelta;
 
-            if (_canMoveSideways)
+            if (CanMoveSideways)
             {
                 cachedPosition.x += touchDelta.x * sideSpeed * Time.deltaTime;
                 cachedPosition.x = Mathf.Clamp(cachedPosition.x, -5, 5);
             }
 
-            if (_canMoveForwards)
+            if (CanMoveForwards)
             {
                 cachedPosition.z += forwardsSpeed * Time.deltaTime;
-                _isMoving = true;
+                IsMoving = true;
             }
             else
             {
-                _isMoving = false; 
+                IsMoving = false; 
             }
 
             float step = sideSpeed * Time.deltaTime;

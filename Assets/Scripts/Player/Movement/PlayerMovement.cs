@@ -8,19 +8,18 @@ namespace Game
 {
     public class PlayerMovement : MonoBehaviour
     {
-        public bool IsMoving => _isMoving;
-        
-        
+        public bool Moving => IsMoving;
+
         [SerializeField] protected float deltaMultiplier, forwardsSpeed, sideSpeed, minYRot, maxYRot;
 
         protected GestureController _gestures; 
         protected Player _player;
         protected Rigidbody _rb;
 
-        protected bool _canMoveForwards;
-        protected bool _canMoveSideways;
-        protected bool _automatedMovementActive;
-        protected bool _isMoving; 
+        protected bool CanMoveForwards;
+        protected bool CanMoveSideways;
+        protected bool AutomatedMovementActive;
+        protected bool IsMoving; 
 
         private void Start()
         {
@@ -31,8 +30,8 @@ namespace Game
 
         public void SetMovementEnabled(bool enabled)
         {
-            _canMoveForwards = enabled;
-            _canMoveSideways = enabled;
+            CanMoveForwards = enabled;
+            CanMoveSideways = enabled;
         }
 
         public virtual void Update()
@@ -50,9 +49,9 @@ namespace Game
 
         public virtual void HandleMovement()
         {
-            if (_automatedMovementActive) return;
+            if (AutomatedMovementActive) return;
 
-            if (_canMoveSideways)
+            if (CanMoveSideways)
             {
                 Vector2 axis = _gestures.ScaledTouchDelta * deltaMultiplier;
                 _yRot += axis.x * sideSpeed * Time.deltaTime;
@@ -65,20 +64,20 @@ namespace Game
                 if(_rb) _rb.angularVelocity = Vector3.zero;
             }
 
-            if (_canMoveForwards)
+            if (CanMoveForwards)
             {
                 transform.position += transform.forward * forwardsSpeed * Time.deltaTime;
-                _isMoving = true; 
+                IsMoving = true; 
             }
             else
             {
-                _isMoving = false;  
+                IsMoving = false;  
             }
         }
 
         public void AutomatedMovementToPosition(Transform target, Action onComplete)
         {
-            _automatedMovementActive = true;
+            AutomatedMovementActive = true;
             _yRot = 0;
             StartCoroutine(CoAutomatedMovement(target, onComplete));
         }
@@ -96,7 +95,7 @@ namespace Game
             transform.position = target.position;
             transform.rotation = target.rotation; 
             
-            _automatedMovementActive = false;
+            AutomatedMovementActive = false;
             if (onComplete != null) onComplete?.Invoke();
         }
     }

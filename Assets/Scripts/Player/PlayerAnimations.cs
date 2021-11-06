@@ -21,7 +21,7 @@ namespace Game
 
         private void Update()
         {
-            anim.SetBool(Running, _movement.IsMoving);
+            anim.SetBool(Running, _movement.Moving);
         }
     }
 }
