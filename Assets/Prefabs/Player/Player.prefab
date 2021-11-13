@@ -272,6 +272,9 @@ MonoBehaviour:
   ladder: {fileID: 7166684569330542149}
   ladderGrowSpeed: 10
   maxLadderYPos: 20
+  windowLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &7469261511167352557
 GameObject:
   m_ObjectHideFlags: 0
