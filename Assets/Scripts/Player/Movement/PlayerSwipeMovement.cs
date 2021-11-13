@@ -10,7 +10,8 @@ namespace Game
     {
         [SerializeField] private float sideSpacing, sideDuration;         
         
-        private bool _canSwipe = true; 
+        private bool _canSwipe = true;
+        private PlayerLadderController _ladderController; 
         
         private void OnEnable()
         {
@@ -22,11 +23,18 @@ namespace Game
             GestureController.OnSwipe -= OnSwipe;
         }
 
+        private void Awake()
+        {
+            _ladderController = GetComponent<PlayerLadderController>();
+        }
+
         private void OnSwipe(Vector2 swipeDir)
         {
             if (!CanMoveSideways) return;
             if (!_canSwipe) return;
-
+            if (_ladderController.IsMovingLadder()) return;
+            
+            _ladderController.ResetLadder();
             Transform t = transform;
             Vector3 position = t.position;
             

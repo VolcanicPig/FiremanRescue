@@ -20,7 +20,6 @@ namespace Game
             GestureController.OnTouchUp += OnTouchUp;
         }
 
-
         private void OnDisable()
         {
             GestureController.OnTouchUp -= OnTouchUp;
@@ -43,7 +42,12 @@ namespace Game
             ResetLadder();
         }
 
-        private void ResetLadder()
+        public bool IsMovingLadder()
+        {
+            return ladder.position.y > 0; 
+        }
+
+        public void ResetLadder()
         {
             _ladderActive = false;
             ladder.localPosition = _ladderStartPos; 
