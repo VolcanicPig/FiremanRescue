@@ -272,6 +272,7 @@ MonoBehaviour:
   ladder: {fileID: 7166684569330542149}
   ladderGrowSpeed: 10
   maxLadderYPos: 20
+  ladderClimbDuration: 1
   windowLayer:
     serializedVersion: 2
     m_Bits: 64

@@ -9,7 +9,7 @@ namespace Game
     public class PlayerLadderController : MonoBehaviour
     {
         [SerializeField] private Transform ladder;
-        [SerializeField] private float ladderGrowSpeed, maxLadderYPos;
+        [SerializeField] private float ladderGrowSpeed, maxLadderYPos, ladderClimbDuration;
         [SerializeField] private LayerMask windowLayer; 
         
         private bool _ladderActive;
@@ -40,8 +40,10 @@ namespace Game
         
         private void OnTouchUp(Vector2 pos)
         {
-            if(IsMovingLadder())
+            if (IsMovingLadder())
+            {
                 PlaceLadder();
+            }
         }
 
         public bool IsMovingLadder()
@@ -93,11 +95,24 @@ namespace Game
         {
             Vector3 startPos = transform.position; 
             ladder.SetParent(null);
-            transform.position = ladder.position;
+            yield return CoLerpPlayerPosition(transform.position, ladder.position); 
             yield return new WaitForSeconds(1);
-            transform.position = startPos; 
+            yield return CoLerpPlayerPosition(transform.position, startPos); 
             ladder.SetParent(transform);
             ResetLadder();
+        }
+
+        IEnumerator CoLerpPlayerPosition(Vector3 fromPos, Vector3 endPos)
+        {
+            float timer = 0;
+            while (timer < ladderClimbDuration)
+            {
+                transform.position = Vector3.Lerp(fromPos, endPos, timer / ladderClimbDuration);
+                timer += Time.deltaTime;
+                yield return null;
+            }
+
+            transform.position = endPos; 
         }
     }
 }
