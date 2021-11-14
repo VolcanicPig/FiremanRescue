@@ -40,7 +40,8 @@ namespace Game
         
         private void OnTouchUp(Vector2 pos)
         {
-            PlaceLadder();
+            if(IsMovingLadder())
+                PlaceLadder();
         }
 
         public bool IsMovingLadder()
