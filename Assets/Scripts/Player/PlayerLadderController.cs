@@ -13,6 +13,7 @@ namespace Game
         [SerializeField] private LayerMask windowLayer; 
         
         private bool _ladderActive;
+        private bool _isUsingLadder;
         private Vector3 _ladderStartPos; 
         
         private void OnEnable()
@@ -34,8 +35,10 @@ namespace Game
 
         private void OnTouchDown(Vector2 pos)
         {
+            if (_isUsingLadder) return; 
             transform.forward = Vector3.forward;   
             _ladderActive = true;
+            _isUsingLadder = true; 
         }
         
         private void OnTouchUp(Vector2 pos)
@@ -54,6 +57,7 @@ namespace Game
         public void ResetLadder()
         {
             _ladderActive = false;
+            _isUsingLadder = false;  
             ladder.localPosition = _ladderStartPos; 
         }
 
@@ -87,8 +91,8 @@ namespace Game
 
         IEnumerator CoWaitThenResetLadder()
         {
-            yield return new WaitForSeconds(1); 
-            ResetLadder();
+            yield return new WaitForSeconds(1);
+            yield return CoResetLadder(); 
         }
 
         IEnumerator CoClimbLadder()
@@ -99,7 +103,7 @@ namespace Game
             yield return new WaitForSeconds(1);
             yield return CoLerpPlayerPosition(transform.position, startPos); 
             ladder.SetParent(transform);
-            ResetLadder();
+            yield return CoResetLadder(); 
         }
 
         IEnumerator CoLerpPlayerPosition(Vector3 fromPos, Vector3 endPos)
@@ -113,6 +117,23 @@ namespace Game
             }
 
             transform.position = endPos; 
+        }
+        
+        IEnumerator CoResetLadder()
+        {
+            float timer = 0;
+            Vector3 startPos = ladder.localPosition; 
+            while (timer < ladderClimbDuration)
+            {
+                ladder.localPosition = Vector3.Lerp(startPos, _ladderStartPos, timer / ladderClimbDuration);
+                timer += Time.deltaTime;
+                yield return null;
+            }
+
+            ladder.localPosition = _ladderStartPos;
+            yield return new WaitForSeconds(0.5f);
+            _isUsingLadder = false;
+            _ladderActive = false; 
         }
     }
 }

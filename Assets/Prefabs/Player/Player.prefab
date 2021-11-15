@@ -256,7 +256,7 @@ MonoBehaviour:
   minYRot: 0
   maxYRot: 0
   sideSpacing: 3
-  sideDuration: 0.5
+  sideDuration: 0.2
 --- !u!114 &5885550315020953509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,7 +272,7 @@ MonoBehaviour:
   ladder: {fileID: 7166684569330542149}
   ladderGrowSpeed: 10
   maxLadderYPos: 20
-  ladderClimbDuration: 1
+  ladderClimbDuration: 0.5
   windowLayer:
     serializedVersion: 2
     m_Bits: 64
