@@ -12,12 +12,12 @@ namespace Game
         public void ActivateRandomWindow()
         {
             Window window = GetRandomInactiveWindow();
-            window.windowActive = true; 
+            window.SetWindowActive(true);
         }
 
         private Window GetRandomInactiveWindow()
         {
-            List<Window> inactiveWindows = new List<Window>(windows.Where(w => !w.windowActive));
+            List<Window> inactiveWindows = new List<Window>(windows.Where(w => !w.WindowActive));
 
             if (inactiveWindows.Count == 0) return windows[0];
 

@@ -79,7 +79,15 @@ namespace Game
             _ladderActive = false;
 
             RaycastHit hit;
-            if (Physics.Raycast(ladder.position, Vector3.forward, out hit, 5, windowLayer))
+            if (!Physics.Raycast(ladder.position, Vector3.forward, out hit, 5, windowLayer))
+            {
+                StartCoroutine(CoWaitThenResetLadder());
+                return; 
+            }
+
+            Window window = hit.collider.GetComponent<Window>();
+            
+            if(window.WindowActive)
             {
                 StartCoroutine(CoClimbLadder());
             }
@@ -101,6 +109,7 @@ namespace Game
             ladder.SetParent(null);
             yield return CoLerpPlayerPosition(transform.position, ladder.position); 
             yield return new WaitForSeconds(1);
+            GameManager.Instance.AddPoints(1);
             yield return CoLerpPlayerPosition(transform.position, startPos); 
             ladder.SetParent(transform);
             yield return CoResetLadder(); 

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9197535560109046660}
   - component: {fileID: 6567481807027780593}
+  - component: {fileID: 3392558317654160735}
   m_Layer: 6
   m_Name: Prefab_Window
   m_TagString: Window
@@ -45,6 +46,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3392558317654160735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2821953853556574552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47754a315b4056047a729d62aef53183, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  windowOnColor: {r: 0.3726415, g: 1, b: 0.4267711, a: 1}
+  windowOffColor: {r: 1, g: 1, b: 1, a: 1}
+  windowMesh: {fileID: 2545954125460153042}
 --- !u!1 &6694986950153811498
 GameObject:
   m_ObjectHideFlags: 0
