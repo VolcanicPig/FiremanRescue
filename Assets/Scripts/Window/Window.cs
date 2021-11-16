@@ -14,7 +14,7 @@ namespace Game
         [SerializeField] private Color windowOffColor = Color.white;
         [SerializeField] private Renderer windowMesh;
         
-        private static readonly int Col = Shader.PropertyToID("_Color");
+        private static readonly int Col = Shader.PropertyToID("_BaseColor");
 
         private void Start()
         {

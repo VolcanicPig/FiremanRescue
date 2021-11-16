@@ -70,6 +70,8 @@ MonoBehaviour:
   - {fileID: 4944149575779868042}
   - {fileID: 7826423357707574843}
   - {fileID: 2554733908240968001}
+  minActivateTime: 1
+  maxActivateTime: 5
 --- !u!1 &3306276053450555282
 GameObject:
   m_ObjectHideFlags: 0

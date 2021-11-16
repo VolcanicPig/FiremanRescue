@@ -14,7 +14,8 @@ namespace Game
         
         private bool _ladderActive;
         private bool _isUsingLadder;
-        private Vector3 _ladderStartPos; 
+        private Vector3 _ladderStartPos;
+        private Window _currentWindow; 
         
         private void OnEnable()
         {
@@ -89,6 +90,7 @@ namespace Game
             
             if(window.WindowActive)
             {
+                _currentWindow = window; 
                 StartCoroutine(CoClimbLadder());
             }
             else
@@ -110,6 +112,7 @@ namespace Game
             yield return CoLerpPlayerPosition(transform.position, ladder.position); 
             yield return new WaitForSeconds(1);
             GameManager.Instance.AddPoints(1);
+            _currentWindow.SetWindowActive(false);
             yield return CoLerpPlayerPosition(transform.position, startPos); 
             ladder.SetParent(transform);
             yield return CoResetLadder(); 
