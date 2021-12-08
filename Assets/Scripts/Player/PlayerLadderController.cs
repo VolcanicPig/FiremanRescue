@@ -135,9 +135,9 @@ namespace Game
         {
             float timer = 0;
             Vector3 startPos = ladder.localPosition; 
-            while (timer < ladderClimbDuration)
+            while (timer < .2f)
             {
-                ladder.localPosition = Vector3.Lerp(startPos, _ladderStartPos, timer / ladderClimbDuration);
+                ladder.localPosition = Vector3.Lerp(startPos, _ladderStartPos, timer / .2f);
                 timer += Time.deltaTime;
                 yield return null;
             }
